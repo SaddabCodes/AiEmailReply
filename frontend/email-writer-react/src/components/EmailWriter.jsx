@@ -12,12 +12,13 @@ import {
   CircularProgress,
 } from "@mui/material";
 import axios from "axios";
+import "./EmailWriter.css";
 
 export default function EmailWriter() {
   const [emailContent, setEmailContent] = useState("");
   const [tone, setTone] = useState("");
   const [generatedReply, setGeneratedReply] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
@@ -40,13 +41,14 @@ export default function EmailWriter() {
       setLoading(false);
     }
   };
+
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h3" component="h1" gutterBottom>
+    <Container maxWidth="md" className="email-writer-container">
+      <Typography variant="h3" component="h1" className="email-writer-title">
         Email Reply Generator
       </Typography>
 
-      <Box sx={{ mx: 3 }}>
+      <Box className="email-writer-box">
         <TextField
           fullWidth
           multiline
@@ -55,15 +57,16 @@ export default function EmailWriter() {
           label="Original Email Content"
           value={emailContent || ""}
           onChange={(e) => setEmailContent(e.target.value)}
-          sx={{ mb: 2 }}
+          className="email-writer-textfield"
         />
 
-        <FormControl fullWidth sx={{ mb: 2 }}>
-          <InputLabel>Tone(Optional)</InputLabel>
+        <FormControl fullWidth className="email-writer-formcontrol">
+          <InputLabel>Tone (Optional)</InputLabel>
           <Select
             value={tone || ""}
             label={"Tone (Optional)"}
             onChange={(e) => setTone(e.target.value)}
+            className="email-writer-select"
           >
             <MenuItem value="">None</MenuItem>
             <MenuItem value="professional">Professional</MenuItem>
@@ -77,20 +80,21 @@ export default function EmailWriter() {
           onClick={handleSubmit}
           disabled={!emailContent || loading}
           fullWidth
+          className="email-writer-button"
         >
-          {loading ? <CircularProgress size={24} /> : "Generate Reply"}
+          {loading ? <CircularProgress size={24} className="email-writer-loader" /> : "Generate Reply"}
         </Button>
       </Box>
 
       {error && (
-        <Typography color="error" sx={{ mb: 2 }}>
+        <Typography color="error" className="email-writer-error">
           {error}
         </Typography>
       )}
 
       {generatedReply && (
-        <Box sx={{ mt: 3 }}>
-          <Typography variant="h6" gutterBottom>
+        <Box className="email-writer-reply-box">
+          <Typography variant="h6" className="email-writer-reply-title">
             Generated Reply
           </Typography>
           <TextField
@@ -100,10 +104,11 @@ export default function EmailWriter() {
             variant="outlined"
             value={generatedReply || ""}
             inputProps={{ readOnly: true }}
+            className="email-writer-reply-textfield"
           />
           <Button
             variant="outlined"
-            sx={{ mt: 2 }}
+            className="email-writer-copy-button"
             onClick={() => navigator.clipboard.writeText(generatedReply)}
           >
             Copy to Clipboard
