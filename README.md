@@ -26,12 +26,3 @@ The **AI Email Reply Generator** is a full-stack web application that uses **Spr
   - React hooks for state management
 
 - **External API**: Gemini API for generating email replies
-
-## Prerequisites
-
-Before running the project, make sure you have the following installed:
-
-- **Java 11** or higher
-- **Node.js** and **npm**
-- **Maven** (for backend dependencies)
-- **Gemini API Key** for generating email replies
